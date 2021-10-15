@@ -9,9 +9,16 @@ let uuidv4Value = new Error(UUID_INIT_ERROR);
 let randomUsers = [];
 let numOfRandomsInTimeP = RANDON_USERS_INIT;
 let job;
-const initialized = false;
+let initialized = false;
 
+/**
+ * Starting cron job according your configuration
+ * @param humanCron - e.g. each 20 seconds, more details here:
+ * https://www.npmjs.com/package/human-to-cron
+ * @param numOfRandomsInTime - amount of random uuids for each cron job
+ */
 function init(humanCron, numOfRandomsInTime) {
+  initialized = true;
   const cronTime = humanToCron(humanCron);
   uuidv4Value = uuidv4();
   if (!numOfRandomsInTime) {
