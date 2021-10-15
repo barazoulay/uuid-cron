@@ -1,2 +1,2 @@
 # uuid-cron
-Control random uuids with cron jobs
+Generate random uuids in a given time
