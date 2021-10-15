@@ -3,11 +3,11 @@ Generate random uuids in a given time
 
 # Quickstart
 
-1. **Install**
+**1. Install**
 ```shell
 npm install uuid-cron
 ```
-2. **Init cron job**
+**2. Init cron job**
 ```javascript
 const { init, uuidv4CronLimited, stop } = require('uuid-cron');
 // run cron job every 20 seconds with 30 random uuids each time.
@@ -15,12 +15,12 @@ const { init, uuidv4CronLimited, stop } = require('uuid-cron');
 init('each 20 seconds', 30);
 ```
 
-3. **Get random uuid according to the init params**
+**3. Get random uuid according to the init params**
 ```javascript
 const randomUUID = uuidv4CronLimited();
 ```
 
-4. **stop the cron job on finish**
+**4. stop the cron job on finish**
 ```javascript
 stop();
 ```
