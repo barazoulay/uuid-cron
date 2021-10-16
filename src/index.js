@@ -10,22 +10,28 @@ let randomUsers = [];
 let numOfRandomsInTimeP = RANDON_USERS_INIT;
 let job;
 let initialized = false;
+let initializedLimited = false;
+
+
+
 
 /**
  * Starting cron job according your configuration
  * @param humanCron - e.g. each 20 seconds, more details here:
  * https://www.npmjs.com/package/human-to-cron
  * @param numOfRandomsInTime - amount of random uuids for each cron job
+ * if null, it returns the same uuid during the cron
  */
 function init(humanCron, numOfRandomsInTime) {
-  initialized = true;
   const cronTime = humanToCron(humanCron);
   uuidv4Value = uuidv4();
-  if (!numOfRandomsInTime) {
+  if (!numOfRandomsInTime || typeof numOfRandomsInTime != 'number') {
+    initialized = true;
     job = new CronJob(cronTime, (() => {
       uuidv4Value = uuidv4();
     }), null, true, 'America/Los_Angeles');
   } else {
+    initializedLimited= true;
     numOfRandomsInTimeP = numOfRandomsInTime;
     randomUsers = computeJobWithLimitedRandoms(cronTime, numOfRandomsInTime);
     job = new CronJob(cronTime, (() => {
@@ -43,7 +49,7 @@ function uuidv4Cron() {
 }
 
 function uuidv4CronLimited() {
-  if (!initialized) {
+  if (!initializedLimited) {
     return initError();
   }
   return randomUsers[Math.floor(Math.random() * numOfRandomsInTimeP)];
