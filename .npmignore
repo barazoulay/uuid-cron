@@ -6,3 +6,6 @@ tsconfig.release.json
 .idea
 src
 uuid-cron-*
+coverage
+jest.config.js
+.github
