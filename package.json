@@ -1,30 +1,41 @@
 {
   "name": "uuid-cron",
-  "version": "1.0.6",
-  "description": "",
-  "main": "src/index.js",
+  "version": "1.1.0",
+  "description": "uuid-cron",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/barazoulay/uuid-cron"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .js",
-    "lint-fix": "eslint . --ext .js --fix",
-    "start": "./src/index.js"
+    "start": "npm run build && npm run serve",
+    "serve": "node dist/index.js",
+    "clean": "rimraf coverage build tmp",
+    "build": "tsc -p tsconfig.release.json",
+    "build:watch": "tsc -w -p tsconfig.release.json",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint-fix": "eslint . --ext .ts,.tsx --fix",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "cron": "1.8.2",
-    "express": "^4.17.1",
+    "express": "4.17.1",
     "human-to-cron": "0.3.1",
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.25.2"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^25.2.1",
+    "jest": "^27.2.5",
+    "ts-jest": "^27.0.7"
   }
 }
