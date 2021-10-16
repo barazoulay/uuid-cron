@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import {NumOfRandomsInTime} from './types/types';
+import {NumOfRandomsInTime} from './types';
 
 function getRandomUsers(numOfRandomsInTime: NumOfRandomsInTime): string[] {
   const randoms = [];
