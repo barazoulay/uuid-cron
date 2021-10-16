@@ -1,6 +1,7 @@
 import { init, uuidv4CronLimited, uuidv4Cron, stop } from '../src';
 let uuidOriginal;
 let uuidTarget;
+
 describe('General functionality', () => {
   afterEach(() => {
     stop();

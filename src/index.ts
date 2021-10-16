@@ -3,7 +3,7 @@ import { CronJob } from 'cron';
 import humanToCron from 'human-to-cron';
 import { initError } from './errorHandler';
 import { NUM_OF_UUID_INIT, UUID_INIT_ERROR } from './constants';
-import { computeJobWithLimitedRandoms } from './cronLogic';
+import { getRandomUUIDS } from './random';
 import {NumOfRandomsInTime} from './types';
 
 let uuidv4Value = new Error(UUID_INIT_ERROR);
@@ -31,9 +31,9 @@ export function init(humanCron: string, numOfRandomsInTime: NumOfRandomsInTime =
   } else {
     initializedLimited= true;
     globalNumberOfUUIDS = numOfRandomsInTime;
-    randomUsers = computeJobWithLimitedRandoms(cronTime, numOfRandomsInTime);
+    randomUsers = getRandomUUIDS(numOfRandomsInTime);
     job = new CronJob(cronTime, () => {
-      randomUsers = computeJobWithLimitedRandoms(cronTime, numOfRandomsInTime);
+      randomUsers = getRandomUUIDS(numOfRandomsInTime);
     }, null, true, 'America/Los_Angeles');
   }
   job.start();
