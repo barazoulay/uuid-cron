@@ -1,0 +1,60 @@
+{
+  "root": true,
+  "env": {
+    "browser": false,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "jest"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 200
+      }
+    ],
+    "eol-last": ["error", "always"],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "no-extra-parens": "error",
+    "complexity": [
+      "error",
+      25
+    ],
+    "eqeqeq": [ "error", "smart" ],
+    "no-else-return": [
+      "error", {
+        "allowElseIf": false
+      }
+    ],
+    "block-spacing": "error",
+    "brace-style": "error",
+    "no-var": "error",
+    "no-useless-rename": "error",
+    "no-underscore-dangle": "error",
+    "no-trailing-spaces": "error",
+    "comma-style": "error",
+    "no-multi-spaces": "error"
+  }
+}
