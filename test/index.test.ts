@@ -1,4 +1,4 @@
-import { init, uuidv4CronLimited, uuidv4Cron, stop } from '../src';
+import { init, getCronUUID, stop } from '../src';
 let uuidOriginal;
 let uuidTarget;
 
@@ -8,17 +8,17 @@ describe('General functionality', () => {
   })
   it('init with cron argument', () => {
     init('each 2 seconds');
-    uuidOriginal = uuidv4Cron();
+    uuidOriginal = getCronUUID();
     for (let i = 0 ; i < 30; i ++){
-      uuidTarget = uuidv4Cron()
+      uuidTarget = getCronUUID()
       expect(uuidOriginal).toEqual(uuidTarget);
     }
   });
   it('init with cron argument and limit uuids', () => {
     init('each 2 seconds', 1);
-    uuidOriginal = uuidv4CronLimited();
+    uuidOriginal = getCronUUID();
     for (let i = 0 ; i < 30; i ++){
-      uuidTarget = uuidv4CronLimited()
+      uuidTarget = getCronUUID()
       expect(uuidOriginal).toEqual(uuidTarget);
     }
   });
