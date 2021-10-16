@@ -1,7 +1,7 @@
 # uuid-cron
 Generate random uuids in a given time
 
-# Quickstart
+# Getting Started
 
 **1. Install**
 ```shell
@@ -10,18 +10,26 @@ npm install uuid-cron
 **2. Init cron job**
 ```javascript
 const { init, uuidv4CronLimited, stop } = require('uuid-cron');
-// run cron job every 20 seconds with 30 random uuids each time.
-// for the first param, read for more details: https://www.npmjs.com/package/human-to-cron
-init('each 20 seconds', 30);
+// for the first param, read cron syntax here: https://www.npmjs.com/package/human-to-cron
+init('each 20 seconds');
 ```
 
-**3. Get random uuid according to the init params**
+**3. uuidv4Cron() will return random uuid every 20 seconds**
 ```javascript
-const randomUUID = uuidv4CronLimited();
+const randomUUID = uuidv4Cron();
 ```
 
-**4. stop the cron job on finish**
+**4. On finish, stop the cron job, otherwise it will continue infinitely**
 ```javascript
 stop();
 ```
+
+### Limit the number of random uuids
+use uuidv4CronLimited to control the number of uuids generated in each cron job
+```javascript
+init('each 20 seconds', 30);
+// each 20 second generate 30 random uuids and return one of them each time
+const limitedRandomUUIDS = uuidv4CronLimited();
+```
+    
 
