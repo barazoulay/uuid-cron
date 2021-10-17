@@ -4,7 +4,7 @@ import humanToCron from 'human-to-cron';
 import { initError } from './errorHandler';
 import { NUM_OF_UUID_INIT, UUID_INIT_ERROR } from './constants';
 import { getRandomUUIDS } from './random';
-import {NumOfRandomsInTime} from './types';
+import {NumOfRandoms} from './types';
 
 let uuidv4Value = new Error(UUID_INIT_ERROR);
 let randomUsers: string[] = [];
@@ -20,10 +20,10 @@ let initializedLimited = false;
  * @param numOfRandomsInTime - amount of random uuids for each cron job
  * if null, it returns the same uuid during the cron
  */
-export function init(humanCron: string, numOfRandomsInTime: NumOfRandomsInTime = globalNumberOfUUIDS) {
+export function init(humanCron: string, numOfRandoms: NumOfRandoms = globalNumberOfUUIDS) {
   const cronTime = humanToCron(humanCron);
   uuidv4Value = uuidv4();
-  if (!numOfRandomsInTime) {
+  if (!numOfRandoms) {
     initialized = true;
     initializedLimited = false;
     job = new CronJob(cronTime, () => {
@@ -32,10 +32,10 @@ export function init(humanCron: string, numOfRandomsInTime: NumOfRandomsInTime =
   } else {
     initializedLimited= true;
     initialized = false;
-    globalNumberOfUUIDS = numOfRandomsInTime;
-    randomUsers = getRandomUUIDS(numOfRandomsInTime);
+    globalNumberOfUUIDS = numOfRandoms;
+    randomUsers = getRandomUUIDS(globalNumberOfUUIDS);
     job = new CronJob(cronTime, () => {
-      randomUsers = getRandomUUIDS(numOfRandomsInTime);
+      randomUsers = getRandomUUIDS(globalNumberOfUUIDS);
     }, null, true, 'America/Los_Angeles');
   }
   job.start();

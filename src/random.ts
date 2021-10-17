@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-import {NumOfRandomsInTime} from './types';
+import {NumOfRandoms} from './types';
 
-export function getRandomUUIDS(numOfRandomsInTime: NumOfRandomsInTime): string[] {
+export function getRandomUUIDS(numOfRandoms: NumOfRandoms): string[] {
   const randoms = [];
-  for (let i = 0; i < numOfRandomsInTime; i++) {
+  for (let i = 0; i < numOfRandoms; i++) {
     randoms.push(uuidv4());
   }
   return randoms;
