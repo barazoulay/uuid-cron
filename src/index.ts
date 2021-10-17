@@ -25,11 +25,13 @@ export function init(humanCron: string, numOfRandomsInTime: NumOfRandomsInTime =
   uuidv4Value = uuidv4();
   if (!numOfRandomsInTime) {
     initialized = true;
+    initializedLimited = false;
     job = new CronJob(cronTime, () => {
       uuidv4Value = uuidv4();
     }, null, true, 'America/Los_Angeles');
   } else {
     initializedLimited= true;
+    initialized = false;
     globalNumberOfUUIDS = numOfRandomsInTime;
     randomUsers = getRandomUUIDS(numOfRandomsInTime);
     job = new CronJob(cronTime, () => {
@@ -39,24 +41,20 @@ export function init(humanCron: string, numOfRandomsInTime: NumOfRandomsInTime =
   job.start();
 }
 
-export function uuidv4Cron() {
-  if (!initialized) {
-    return initError();
+export function getCronUUID() {
+  if (initializedLimited) {
+    return randomUsers[Math.floor(Math.random() * globalNumberOfUUIDS)];
   }
-  return uuidv4Value;
-}
-
-export function uuidv4CronLimited() {
-  if (!initializedLimited) {
-    return initError();
+  if (initialized) {
+    return uuidv4Value;
   }
-  return randomUsers[Math.floor(Math.random() * globalNumberOfUUIDS)];
+  return initError();
 }
 
 export function stop() {
   job.stop();
 }
 
-export function uuidv4Random() {
+export function getUUID() {
   return uuidv4();
 }
