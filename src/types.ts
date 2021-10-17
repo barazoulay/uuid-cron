@@ -1,1 +1,1 @@
-export type NumOfRandomsInTime = number | null | undefined;
+export type NumOfRandoms = number | null | undefined;
